@@ -27,9 +27,8 @@ const handleOndrop = (columnIndex) => {
 }
 const handleDragOver = (event) => {
   event.preventDefault();
-}
+};
 </script>
-
 <template>
   <div class="flex gap-6 items-start">
     <section  
@@ -55,7 +54,8 @@ const handleDragOver = (event) => {
       >
         <CardTask 
           @click="onClickTask(columnIndexS, taskIndexF)" 
-          :task="taskF" 
+          :task="taskF"
+          :columnIndex="columnIndexS" 
           />
       </div>
     </section>

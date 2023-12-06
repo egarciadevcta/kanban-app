@@ -14,7 +14,7 @@ const inputs = ref([]);
 
 const board = reactive({
   name: '',
-  columns: []
+  columns: [{ name: '', tasks: [] }]
 });
 const columnsPlaceholders = {
   0: 'Todo...',
@@ -24,6 +24,13 @@ const columnsPlaceholders = {
 
 const addColumn = () => {
   board.columns.push({ name: '', tasks: [] });
+}
+const deleteColumn = (index) => {
+  if (board.columns.length === 3) {
+    board.columns[index].name = ''
+  } else {
+    board.columns.splice(index, 1)
+  }
 }
 const onSubmit = () => {
   if (validate()) {
@@ -55,7 +62,7 @@ if (controllerStore.boardForm.edit) {
   board.name = JSON.parse(JSON.stringify(boardsStore.boards[boardsStore.selectedBoard].name));
   board.columns = JSON.parse(JSON.stringify(boardsStore.getCurrentBoard.columns));
 } else {
-  board.columns = [{ name: '', tasks: [] }, { name: '', tasks: [] }];
+  board.columns = [{ name: 'TODO', tasks: [] }, { name: 'In Progress', tasks: [] },{ name: 'DONE', tasks: [] }];
 }
 onBeforeUpdate(() => {
   inputs.value = []
@@ -74,7 +81,8 @@ onBeforeUpdate(() => {
           <p class="text-medium-grey dark:text-white text-xs font-bold">Board Columns</p>
           <div class="flex items-center justify-between gap-4" v-for="(column, index) in board.columns" :key="index">
             <Input :ref="el => { inputs[index] = el }" v-model="column.name"
-              :placeholder="columnsPlaceholders[index] ? columnsPlaceholders[index] : 'Your Column title...'" />
+              :placeholder="columnsPlaceholders[index] ? columnsPlaceholders[index] : 'Your column title...'" />
+            <img src="@/assets/icon-cross.svg" @click="deleteColumn(index)" class="cursor-pointer" />
           </div>
           <BtnNewColumn @click.stop="addColumn">+ Add New Column</BtnNewColumn>
         </div>

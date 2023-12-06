@@ -109,7 +109,7 @@ onBeforeUpdate(() => {
       </div>
         <div class="flex flex-col gap-2">
           <p class="text-medium-grey text-xs font-bold">Status</p>
-          <SelectState @onClickOption="updateColumn" :value="columnName" />
+          <SelectState @onClickOption="updateColumn" :value="columnName"/>
         </div>
         <BtnSubmit type="submit">
           {{ controllerStore.cardTaskForm.edit ? 'Save Changes' : 'Create Task' }}

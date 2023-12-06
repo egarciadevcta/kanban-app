@@ -19,9 +19,8 @@ const props = defineProps({
       <span 
         class="rounded-md border border-medium-grey px-1 py-0 text-xs " 
         :style="{ backgroundColor: bulletColors(props.columnIndex) }">
-        {{ useBoardsStore().getColumns[columnIndex].name }}
+        {{ useBoardsStore().getColumns[columnIndex]?.name }}
       </span>
-
     </article>
   </li>
 </template>
