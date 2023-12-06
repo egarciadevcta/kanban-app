@@ -1,3 +1,12 @@
+const fileName = "app-data";
+
+export const saveInLocalStorage = (data) => {
+  localStorage.setItem(fileName, JSON.stringify(data));
+};
+export const getDataFromLocalStorage = () => {
+  return localStorage.getItem(fileName);
+};
+
 export const bulletColors = (index) => {
   const color = ["#1574e3", "#ddc10b", "#089311"];
   if (color[index]) {
@@ -9,21 +18,7 @@ export const bulletColors = (index) => {
     return randomColor;
   }
 };
-
-export const applyDrag = (arr, dragResult) => {
-  const { removedIndex, addedIndex, payload } = dragResult;
-  if (removedIndex === null && addedIndex === null) return arr;
-
-  const result = [...arr];
-  let itemToAdd = payload;
-
-  if (removedIndex !== null) {
-    itemToAdd = result.splice(removedIndex, 1)[0];
-  }
-
-  if (addedIndex !== null) {
-    result.splice(addedIndex, 0, itemToAdd);
-  }
-
-  return result;
+export const tags = () => {
+  const tags = ["Devs", "Design", "SEO", "Sales", "Site"];
+  return tags;
 };

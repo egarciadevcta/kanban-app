@@ -1,9 +1,8 @@
 <script setup>
-import { Container, Draggable } from 'vue-dndrop';
 import CardTask from "@/components/CardTask.vue";
 import { useBoardsStore } from '@/stores/board.js';
 import { useControllerStore } from '@/stores/controller.js';
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { bulletColors } from "../utils/helpers";
 
 const controllerStore = useControllerStore();
@@ -21,7 +20,7 @@ const onClickTask = (column, task) => {
 const handleDragStart = (task, columnIndex, taskIndex) => {
   const taskData = { task, columnIndex, taskIndex }
   boardsStore.setDraggedCardTask(taskData);
-  console.log('Task Card data:', droppedTaskCard);
+  console.log('Task Card data:', droppedTaskCard.value.task);
 }
 const handleOndrop = (columnIndex) => {
   boardsStore.drop(columnIndex);
@@ -32,12 +31,12 @@ const handleDragOver = (event) => {
 </script>
 
 <template>
-  <div class="flex gap-6">
+  <div class="flex gap-6 items-start">
     <section  
       data-dragscroll 
       v-if="searchTerm" 
       v-for="(columnS, columnIndexS) in columns" :key="columnIndexS" 
-      class="min-w-[280px] last:pr-6 box-content"
+      class="min-w-[280px] box-content"
       @drop="handleOndrop(columnIndexS)"
       @dragover="handleDragOver"
     >
@@ -65,27 +64,28 @@ const handleDragOver = (event) => {
       v-else 
       v-for="(column, columnIndex) in boardsStore.getColumns" 
       :key="columnIndex" 
-      class="bg-lines-light min-w-[280px] last:pr-6"
+      class="bg-lines-dark rounded-lg min-w-[280px] justify-start"
       @drop="handleOndrop(columnIndex)"
       @dragover="handleDragOver"
     >        
-      <div class="flex gap-3 pb-6">
+      <div class="flex gap-3 p-6">
         <div class="rounded-full h-4 w-4" :style="{ backgroundColor: bulletColors(columnIndex) }"></div>
-        <h2 class="text-medium-grey font-bold text-xs uppercase">
+        <h2 class="text-lines-light font-bold text-xs uppercase">
           {{ column.name }} ( {{ column.tasks.length }} )
         </h2>
       </div>
         <div
           v-for="(task, taskIndex) in column?.tasks" 
           :key="taskIndex"
-          class="list-none" 
+          class="list-none transition-transform ease-in-out active:opacity-10 border-none active:rotate-3" 
           draggable="true"
           @dragstart="handleDragStart(task, columnIndex, taskIndex)"
         >
-          <CardTask v-model="column.tasks" @click="onClickTask(columnIndex, taskIndex)" :task="task" />
+          <CardTask v-model="column.tasks" @click="onClickTask(columnIndex, taskIndex)" :task="task" :columnIndex="columnIndex"/>
     </div>
     </section>
   </div>
 </template>
+
 
 

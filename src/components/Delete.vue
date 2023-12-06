@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import { useBoardsStore } from '@/stores/board.js';
 import { useControllerStore } from '@/stores/controller.js';
-import ButtonDelete from '@/components/ButtonDelete.vue';
-import ButtonSecondary from '@/components/SecundaryLarge.vue';
+import BtnDelete from '@/components/BtnDelete.vue';
+import BtnCancel from '@/components/BtnSecundaryLarge.vue';
 
 const boardsStore = useBoardsStore();
 const controllerStore = useControllerStore();
@@ -37,8 +37,8 @@ const onCancel = () => {
         </div>
         <p class="text-medium-grey text-sm">{{ warning }}</p>
         <div class="flex flex-col gap-4">
-          <ButtonDelete @click.stop="onDelete">Delete</ButtonDelete>
-          <ButtonSecondary @click.stop="onCancel">Cancel</ButtonSecondary>
+          <BtnDelete @click.stop="onDelete">Delete</BtnDelete>
+          <BtnCancel @click.stop="onCancel">Cancel</BtnCancel>
         </div>
       </div>
     </div>

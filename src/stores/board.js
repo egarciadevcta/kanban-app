@@ -33,20 +33,11 @@ export const useBoardsStore = defineStore({
   },
   actions: {
     changeTaskColumn(index) {
-      //console.log("Index column Init: ", index, "task:", this.selectedCardTask);
       if (!(index === this.selectedColumn)) {
         this.getCurrentBoard?.columns[index]?.tasks.push(this.getCardTask);
-        this.getCurrentColumn?.tasks.splice(this.selectedTask, 1);
+        this.getCurrentColumn?.tasks.splice(this.selectedCardTask, 1);
         this.selectedColumn = index;
         this.selectedCardTask = this.getCurrentColumn?.tasks.length - 1;
-        //console.log("Index column if: ", index, "task:", this.selectedCardTask);
-      }
-    },
-    saveTaskChanges({ cardTask, column }) {
-      console.log(cardTask);
-      this.getCurrentColumn.tasks[this.selectedCardTask] = cardTask;
-      if (this.selectedColumn !== column) {
-        this.changeTaskColumn(column);
       }
     },
     setSearchTerm(term) {

@@ -13,20 +13,22 @@ import CardTaskForm from '@/components/CardTaskForm.vue';
 import BoardForm from '@/components/BoardForm.vue';
 import Delete from '@/components/Delete.vue';
 import Sidebar from '@/components/Sidebar.vue';
+import { saveInLocalStorage, getDataFromLocalStorage } from './utils/helpers';
 
 const boardsStore = useBoardsStore();
 const controllerStore = useControllerStore();
 
 onMounted(async () => {
   boardsStore.$subscribe((_mutations, state) => {
-    localStorage.setItem('app-data', JSON.stringify(state));
+    saveInLocalStorage(state);
   });
-  const storageData = localStorage.getItem("app-data");
+  const storageData = getDataFromLocalStorage();
   if (storageData === null) {
-    const jsonData = await import("@/persistence/app-data.json");
+    const jsonData = await import('@/persistence/app-data.json');
     boardsStore.boards = jsonData.boards;
   } else {
     boardsStore.$state = JSON.parse(storageData);
+    //saveInJSONFile('@/persistence/app-data2.json', JSON.parse(storageData));
   }
 }) 
 </script>
@@ -41,7 +43,6 @@ onMounted(async () => {
         <div data-dragscroll class="mx-auto w-11/12 pt-6 pb-24 ">
           <div data-dragscroll v-if="boardsStore.getColumns" class="flex">
             <Board data-dragscroll />
-            
           </div>
           <NoBoards v-else-if="boardsStore.boards.length === 0" />
           <EmptyBoard v-else />

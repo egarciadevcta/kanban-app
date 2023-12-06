@@ -2,9 +2,9 @@
 import { ref, reactive, onBeforeUpdate } from 'vue'
 import { useBoardsStore } from '@/stores/board.js';
 import { useControllerStore } from '@/stores/controller.js';
-import InputText from '@/components/InputText.vue';
-import ButtonPrimaryLarge from '@/components/ButtonPrimary.vue';
-import ButtonSecondaryLarge from '@/components/SecundaryLarge.vue';
+import Input from '@/components/InputElement.vue';
+import BtnSubmit from '@/components/BtnPrimary.vue';
+import BtnNewColumn from '@/components/BtnSecundaryLarge.vue';
 
 const boardsStore = useBoardsStore();
 const controllerStore = useControllerStore();
@@ -69,19 +69,18 @@ onBeforeUpdate(() => {
             {{ controllerStore.boardForm.edit ? 'Edit Board' : 'Add New Board' }}
           </h4>
         </div>
-        <InputText ref="inputTitle" v-model="board.name" inputName="Board Name" placeholder="e.g. Web Design" />
+        <Input ref="inputTitle" v-model="board.name" inputName="Board Name" placeholder="e.g. Web Design" />
         <div class="flex flex-col gap-3">
           <p class="text-medium-grey dark:text-white text-xs font-bold">Board Columns</p>
           <div class="flex items-center justify-between gap-4" v-for="(column, index) in board.columns" :key="index">
-            <InputText :ref="el => { inputs[index] = el }" v-model="column.name"
+            <Input :ref="el => { inputs[index] = el }" v-model="column.name"
               :placeholder="columnsPlaceholders[index] ? columnsPlaceholders[index] : 'Your Column title...'" />
-            
           </div>
-          <ButtonSecondaryLarge @click.stop="addColumn">+ Add New Column</ButtonSecondaryLarge>
+          <BtnNewColumn @click.stop="addColumn">+ Add New Column</BtnNewColumn>
         </div>
-        <ButtonPrimaryLarge type="submit">
+        <BtnSubmit type="submit">
           {{ controllerStore.boardForm.edit ? 'Save Changes' : 'Create New Board' }}
-        </ButtonPrimaryLarge>
+        </BtnSubmit>
       </div>
     </form>
 </template>
