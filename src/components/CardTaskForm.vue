@@ -2,7 +2,7 @@
 import { ref, reactive, onBeforeUpdate } from 'vue';
 import { useBoardsStore } from '@/stores/board.js';
 import { useControllerStore } from '@/stores/controller.js';
-import SelectState from '@/components/Select.vue';
+import SelectStatus from '@/components/Select.vue';
 import InputElement from '@/components/InputElement.vue';
 import Textarea from  '@/components/Textarea.vue';
 import BtnSubmit from '@/components/BtnPrimary.vue';
@@ -109,7 +109,7 @@ onBeforeUpdate(() => {
       </div>
         <div class="flex flex-col gap-2">
           <p class="text-medium-grey text-xs font-bold">Status</p>
-          <SelectState @onClickOption="updateColumn" :value="columnName"/>
+          <SelectStatus @onClickOption="updateColumn" :value="columnName"/>
         </div>
         <BtnSubmit type="submit">
           {{ controllerStore.cardTaskForm.edit ? 'Save Changes' : 'Create Task' }}

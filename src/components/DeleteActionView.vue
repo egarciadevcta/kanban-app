@@ -10,9 +10,9 @@ const controllerStore = useControllerStore();
 
 const warning = computed(() => {
   if (controllerStore.delete.board) {
-    return `Are you sure you want to delete the ‘${boardsStore.getCurrentBoard.name}’ board? This action will remove all columns and tasks and cannot be reversed.`
+    return `Do you want to delete the ‘${boardsStore.getCurrentBoard.name}’ board? This action cannot be reversed.`
   } else {
-    return `Are you sure you want to delete the ‘${boardsStore.getCardTask.title}’ task? This action cannot be reversed.`
+    return `Do you want to delete the ‘${boardsStore.getCardTask.title}’ task? This action cannot be reversed.`
   }
 });
 

@@ -17,7 +17,6 @@ export const useControllerStore = defineStore({
       board: false,
     },
     overlay: false,
-    dragging: false,
   }),
   getters: {},
   actions: {

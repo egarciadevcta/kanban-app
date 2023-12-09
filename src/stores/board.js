@@ -24,10 +24,12 @@ export const useBoardsStore = defineStore({
     getColumnsNames: (state) =>
       state.boards[state.selectedBoard]?.columns.map((c) => c.name),
     filteredTasks: (state) => (tasks) => {
-      const result = tasks.filter((task) =>
-        task.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return result;
+      const searchWords = state.searchTerm.toLowerCase().split(" ");
+      return tasks.filter((task) => {
+        return searchWords.every((word) =>
+          task.title.toLowerCase().includes(word)
+        );
+      });
     },
     getDroppedTaskCard: (state) => state.draggedCardTask,
   },

@@ -18,7 +18,3 @@ export const bulletColors = (index) => {
     return randomColor;
   }
 };
-export const tags = () => {
-  const tags = ["Devs", "Design", "SEO", "Sales", "Site"];
-  return tags;
-};

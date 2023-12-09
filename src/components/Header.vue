@@ -3,7 +3,7 @@
 import { useBoardsStore } from '@/stores/board.js';
 import { useControllerStore } from '@/stores/controller.js';
 import DropDown from '@/components/DropDown.vue';
-import PrimarySmall from '@/components/PrimarySmall.vue';
+import BtnNewTask from '@/components/BtnPrimarySmall.vue';
 import SearchForm from "@/components/SearchForm.vue";
 
 const boardsStore = useBoardsStore();
@@ -43,7 +43,7 @@ const addTask = () => {
       </h1>
       <SearchForm />
       <div v-if="boardsStore.boards.length" class="flex items-center gap-4 ml-auto">
-        <PrimarySmall @click="addTask" class="hidden sm:block">+ Add New Task</PrimarySmall>
+        <BtnNewTask @click="addTask" class="hidden sm:block">+ Add New Task</BtnNewTask>
         <DropDown target="Board" @onClickEdit="editTask" @onClickDelete="deleteTask" />
       </div>
     </div>

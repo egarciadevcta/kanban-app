@@ -1,6 +1,6 @@
 <script setup>
 import { useControllerStore } from '@/stores/controller.js';
-import BtnPrimarySmall from '@/components/PrimarySmall.vue';
+import BtnNewBoard from '@/components/BtnPrimarySmall.vue';
 
 const controllerStore = useControllerStore();
 const createNewBoard = () => {
@@ -14,6 +14,6 @@ const createNewBoard = () => {
     :class="controllerStore.sidebar ? 'sm:translate-x-[-85%] sm:w-6/12 md:translate-x-[-80%] lg:translate-x-[-75%]' : ''">
     <p class="text-center text-lg font-bold text-medium-grey">There is no boards Create a new board to get started.
     </p>
-    <BtnPrimarySmall @click.stop="createNewBoard">+ Add New Board</BtnPrimarySmall>
+    <BtnNewBoard @click.stop="createNewBoard">+ Add New Board</BtnNewBoard>
   </div>
 </template>
