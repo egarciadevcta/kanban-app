@@ -1,5 +1,5 @@
-import { createApp } from "vue";
 import { createPinia } from "pinia";
+import { createApp } from "vue";
 import VueDragscroll from "vue-dragscroll";
 import "./style.css";
 import App from "./App.vue";

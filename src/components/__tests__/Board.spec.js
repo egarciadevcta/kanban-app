@@ -1,17 +1,18 @@
-import { describe, it, expect } from "vitest";
-import { mount } from "@vue/test-utils";
-import App from "../../App.vue";
-import Header from "../Header.vue";
+import { describe, it, expect, vitest } from "vitest";
+import { shallowMount } from "@vue/test-utils";
+import { createTestingPinia } from "@pinia/testing";
+import { useBoardStore } from "../../stores/board";
 import Board from "../Board.vue";
 
-describe("App", () => {
-  const wrapper = mount(App);
-  it("Render App Header", () => {
-    wrapper.findComponent(Header);
-    expect(wrapper.exists()).toBe(true);
-  });
-  it("Render Board(s)", () => {
-    wrapper.findComponent(Board);
-    expect(wrapper.exists()).toBe(true);
+describe("Board", () => {
+  it("renders correctly", async () => {
+    const wrapper = shallowMount(Board, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vitest.fn })],
+      },
+    });
+    const store = useBoardStore;
+
+    expect(wrapper.html()).toMatchSnapshot();
   });
 });
