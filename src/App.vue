@@ -1,7 +1,7 @@
 <script setup>
 import Board from '@/components/Board.vue';
 import HeaderP from '@/components/Header.vue';
-import bgOverlay from '@/components/bgOverlay.vue';
+import bgOverlay from '@/components/BgOverlay.vue';
 import CardTaskView from '@/components/CardTaskModal.vue';
 
 import { onMounted } from 'vue';
